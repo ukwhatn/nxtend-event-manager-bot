@@ -1,5 +1,5 @@
 ENV ?= "dev"
-POETRY_GROUPS = "server,discord,db,dev"
+POETRY_GROUPS = "discord"
 
 ifeq ($(ENV), prod)
 	COMPOSE_YML := compose.prod.yml

@@ -8,6 +8,8 @@ OWNER_ID = os.environ.get("DISCORD_OWNER_ID")
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
 
+API_KEY = os.environ.get("API_KEY")
+
 
 async def NOTIFY_TO_OWNER(bot, message: str):
     owner = await bot.fetch_user(OWNER_ID)
