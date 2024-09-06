@@ -7,6 +7,5 @@ services:
       - ./discord:/app
     env_file:
       - ./envs/discord.env
-      - ./envs/db.env
       - ./envs/sentry.env
     restart: always

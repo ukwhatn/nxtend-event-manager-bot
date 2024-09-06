@@ -7,7 +7,7 @@ else
 endif
 
 poetry\:install:
-	poetry install --with discord,db
+	poetry install --with discord
 
 poetry\:install\:dev:
 	poetry install --with discord,dev

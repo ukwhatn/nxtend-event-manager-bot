@@ -6,7 +6,7 @@ from discord.ext import commands
 from config import bot_config
 
 
-class CreateLoginTokenPanel(discord.ui.view):
+class CreateLoginTokenPanel(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
@@ -20,25 +20,25 @@ class CreateLoginTokenPanel(discord.ui.view):
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             data={
-                'user_id': user_id,
+                'discord_id': user_id,
                 'api_key': bot_config.API_KEY
             }
         )
 
-        if resp.status_code == 200:
-            await interaction.response.send_message([
-                f"> # [このURLからログインしてください]({resp.json()['url']})",
-                f"> - ※ このURLは1回限り、1時間以内のみ有効です。また、このURLは他の人に教えないでください。"
-            ], ephemeral=True)
+        if resp.status_code == httpx.codes.CREATED:
+            await interaction.response.send_message("\n".join([
+                f"> ## [このURLからログインしてください]({resp.json()['url']})",
+                f"> - ※ このURLは発行から1時間以内に限り有効です。また、このURLは他の人に教えないでください。"
+            ]), ephemeral=True)
         else:
             await interaction.response.send_message("エラーが発生しました。スタッフにお声がけください。", ephemeral=True)
 
 
 class CreateLoginToken(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot: discord.Client):
         self.bot = bot
 
-    @commands.Cog.listener('on_ready')
+    @commands.Cog.listener()
     async def on_ready(self):
         self.bot.add_view(CreateLoginTokenPanel())
 
