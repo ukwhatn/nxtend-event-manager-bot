@@ -27,7 +27,9 @@ class CreateLoginTokenPanel(discord.ui.View):
 
         if resp.status_code == httpx.codes.CREATED:
             await interaction.response.send_message("\n".join([
-                f"> ## [このURLからログインしてください]({resp.json()['url']})",
+                f"> ## 以下のURLからログインしてください",
+                f"> {resp.json()['url']}",
+                f"> "
                 f"> - ※ このURLは発行から1時間以内に限り有効です。また、このURLは他の人に教えないでください。"
             ]), ephemeral=True)
         else:
