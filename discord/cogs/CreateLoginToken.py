@@ -29,7 +29,7 @@ class CreateLoginTokenPanel(discord.ui.View):
             await interaction.response.send_message("\n".join([
                 f"> ## 以下のURLからログインしてください",
                 f"> {resp.json()['url']}",
-                f"> "
+                f"> ",
                 f"> - ※ このURLは発行から1時間以内に限り有効です。また、このURLは他の人に教えないでください。"
             ]), ephemeral=True)
         else:
